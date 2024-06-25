@@ -18,8 +18,8 @@ jobs:
 
     - name: Configure Docker daemon for SSL
       run: |
-        sudo mkdir -p /usr/local/share/ca-certificates
-        echo "${{ secrets.CA_CERT }}" | sudo tee /usr/local/share/ca-certificates/cp-harbor-ca.crt
+        sudo mkdir -p /etc/docker/certs.d/harbor.133.186.210.147.nip.io
+        echo "${{ secrets.HARBOR_CA }}" | sudo tee /etc/docker/certs.d/harbor.133.186.210.147.nip.io/ca.crt
 
     - name: Log in to Harbor
       env:
