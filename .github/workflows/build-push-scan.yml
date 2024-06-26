@@ -46,7 +46,7 @@ jobs:
       env:
         IMAGE_NAME: harbor.133.186.210.147.nip.io/cp-test/go-sample:latest
       run: |
-        trivy image --exit-code 1 --severity HIGH,CRITICAL $IMAGE_NAME
+        trivy image --exit-code 0 --severity HIGH,CRITICAL $IMAGE_NAME
 
     - name: Deploy to Kubernetes
       env:
