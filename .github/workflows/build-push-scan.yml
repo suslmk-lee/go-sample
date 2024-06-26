@@ -53,8 +53,13 @@ jobs:
         mkdir -p $HOME/.kube
         echo "${{ secrets.KUBECONFIG }}" | base64 --decode > $HOME/.kube/config
 
-    - name: Deploy to Kubernetes
+    - name: Apply Kubernetes deployment
       run: |
         kubectl apply -f k8s/deployment.yaml
+
+    - name: Update Kubernetes deployment image
+      env:
+        IMAGE_NAME: harbor.133.186.210.147.nip.io/cp-test/go-sample:latest
+      run: |
         kubectl set image deployment/my-deployment my-container=$IMAGE_NAME
         kubectl rollout status deployment/my-deployment
