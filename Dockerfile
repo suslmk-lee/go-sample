@@ -19,8 +19,8 @@ RUN go build -o main .
 # Start a new stage from scratch
 FROM alpine:latest
 
-# Create a non-root user and group
-RUN addgroup -S appgroup && adduser -S appuser -G appgroup
+# Create a non-root user and group with specific IDs
+RUN addgroup -S appgroup && adduser -S -u 1001 appuser -G appgroup
 
 WORKDIR /home/appuser
 
@@ -31,7 +31,7 @@ COPY --from=builder /app/main .
 RUN chown -R appuser:appgroup /home/appuser
 
 # Switch to the non-root user
-USER appuser
+USER 1001
 
 # Expose port 8080 to the outside world
 EXPOSE 8080
