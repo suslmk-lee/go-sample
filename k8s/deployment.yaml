@@ -16,6 +16,8 @@ spec:
     spec:
       securityContext:
         runAsNonRoot: true
+        seccompProfile:
+          type: RuntimeDefault
       containers:
         - name: my-container
           image: harbor.133.186.210.147.nip.io/cp-test/go-sample:latest
@@ -26,3 +28,6 @@ spec:
             capabilities:
               drop:
                 - ALL
+            allowPrivilegeEscalation: false
+            seccompProfile:
+              type: RuntimeDefault
