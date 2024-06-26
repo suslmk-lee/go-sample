@@ -22,13 +22,13 @@ FROM alpine:latest
 # Create a non-root user and group
 RUN addgroup -S appgroup && adduser -S appuser -G appgroup
 
-WORKDIR /root/
+WORKDIR /home/appuser
 
 # Copy the Pre-built binary file from the previous stage
 COPY --from=builder /app/main .
 
 # Change ownership of the files to the non-root user
-RUN chown -R appuser:appgroup /root/
+RUN chown -R appuser:appgroup /home/appuser
 
 # Switch to the non-root user
 USER appuser
