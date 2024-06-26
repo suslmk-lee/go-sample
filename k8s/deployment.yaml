@@ -14,6 +14,8 @@ spec:
       labels:
         app: go-sample
     spec:
+      imagePullSecrets:
+        - name: harbor-registry-secret
       securityContext:
         runAsNonRoot: true
         seccompProfile:
